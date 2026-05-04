@@ -39,4 +39,9 @@ tutorial16_shadowmaps/tutorial16_shadowmaps_simple
 tutorial18_billboards_and_particles/tutorial18_billboards
 tutorial18_billboards_and_particles/tutorial18_particles
 
-external/gdm
+external/
+!external/AntTweakBar-1.16
+!external/assimp-3.0.1270
+!external/rpavlik-cmake-modules-76c1eb4
+!external/bullet-2.81-rev2613
+!external/CMakeLists.txt
