@@ -43,25 +43,10 @@ include_directories(
 )
 
 
-######################## TODO : link gdm
 set(ALL_LIBS
 	${OPENGL_LIBRARY}
-	glfw
+	gdm::deps
 )
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-set(ALL_LIBS
-	${ALL_LIBS}
-	glew
-	glm
-)
-else()
-set(ALL_LIBS
-	${ALL_LIBS}
-	GLEW_1130
-)
-
-endif()
 
 
 add_definitions(

@@ -13,8 +13,6 @@ add_definitions(
 
 ### Opengl dependencies ###
 
-include(FetchContent)
-
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 
 set(GDM_WINDOW_BACKEND "glfw" CACHE STRING "")
@@ -25,6 +23,8 @@ set(GDM_GLFW_VERSION "3.4.0" CACHE STRING "GLFW version")
 set(GDM_GLEW_VERSION "2.3.1" CACHE STRING "GLEW version")
 set(GDM_GLM_VERSION "1.0.3" CACHE STRING "GLM version")
 
+# TODO : use file(DOWNLOAD)
+include(FetchContent)
 FetchContent_Declare(
 	gdm
 	GIT_REPOSITORY https://github.com/awidesky/gdm.git
@@ -34,20 +34,21 @@ FetchContent_Declare(
 	DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
 FetchContent_MakeAvailable(gdm)
-
+set(OPENGL_LIBRARY
+	${OPENGL_LIBRARY}
+	gdm::window # original script only add glfw, I don't know if ANTTWEAKBAR really need it, but..
+)
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 set(OPENGL_LIBRARY
 	${OPENGL_LIBRARY}
 	-lGL -lGLU -lXrandr -lXext -lX11 -lrt
 	${CMAKE_DL_LIBS}
-	${GLFW_LIBRARIES}
 )
 elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 set(OPENGL_LIBRARY
 	${OPENGL_LIBRARY}
 	${CMAKE_DL_LIBS}
-	${GLFW_LIBRARIES}
 )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
