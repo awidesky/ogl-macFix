@@ -11,19 +11,29 @@ add_definitions(
 	-D_CRT_SECURE_NO_WARNINGS
 )
 
-### GLFW ###
+### Opengl dependencies ###
+
+include(FetchContent)
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-else()
-add_subdirectory (glfw-3.1.2)
+set(GDM_WINDOW_BACKEND "glfw" CACHE STRING "")
+set(GDM_GL_LOADER "glew" CACHE STRING "")
+set(GDM_USE_GLM ON CACHE BOOL "")
 
-include_directories(
-	glfw-3.1.2/include/GLFW/
-	glew-1.13.0/include/
+set(GDM_GLFW_VERSION "3.4.0" CACHE STRING "GLFW version")
+set(GDM_GLEW_VERSION "2.3.1" CACHE STRING "GLEW version")
+set(GDM_GLM_VERSION "1.0.3" CACHE STRING "GLM version")
+
+FetchContent_Declare(
+	gdm
+	GIT_REPOSITORY https://github.com/awidesky/gdm.git
+	GIT_TAG        debug
+	GIT_SHALLOW    TRUE
+	SOURCE_DIR     ${CMAKE_SOURCE_DIR}/external/gdm
+	DOWNLOAD_EXTRACT_TIMESTAMP TRUE
 )
-endif()
+FetchContent_MakeAvailable(gdm)
 
 
 if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -40,27 +50,6 @@ set(OPENGL_LIBRARY
 	${GLFW_LIBRARIES}
 )
 endif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-
-### GLEW ###
-
-if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-else()
-set(GLEW_SOURCE
-	glew-1.13.0/src/glew.c
-)
-
-set(GLEW_HEADERS glew-1.13.0/include/GL/glew.h)
-
-add_library( GLEW_1130 STATIC
-	${GLEW_SOURCE}
-	${GLEW_HEADERS}
-)
-
-target_link_libraries(GLEW_1130
-	${OPENGL_LIBRARY}
-	${EXTRA_LIBS}
-)
-endif()
 
 
 ### ANTTWEAKBAR ###
@@ -184,4 +173,5 @@ add_subdirectory( bullet-2.81-rev2613/src/BulletSoftBody )
 add_subdirectory( bullet-2.81-rev2613/src/BulletCollision )
 add_subdirectory( bullet-2.81-rev2613/src/BulletDynamics )
 add_subdirectory( bullet-2.81-rev2613/src/LinearMath )
+
 
