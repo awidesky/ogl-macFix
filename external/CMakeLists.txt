@@ -16,7 +16,7 @@ add_definitions(
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "Build the GLFW documentation")
 
 set(GDM_WINDOW_BACKEND "glfw" CACHE STRING "")
-set(GDM_GL_LOADER "glew" CACHE STRING "")
+set(GDM_GL_LOADER "glew-glad" CACHE STRING "")
 set(GDM_USE_GLM ON CACHE BOOL "")
 
 set(GDM_GLFW_VERSION "3.4.0" CACHE STRING "GLFW version")
@@ -25,6 +25,7 @@ set(GDM_GLM_VERSION "1.0.3" CACHE STRING "GLM version")
 
 # TODO : use file(DOWNLOAD)
 include(FetchContent)
+set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
 FetchContent_Declare(
 	gdm
 	GIT_REPOSITORY https://github.com/awidesky/gdm.git
