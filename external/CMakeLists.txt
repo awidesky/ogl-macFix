@@ -141,6 +141,7 @@ target_link_libraries(ANTTWEAKBAR_116_OGLCORE_GLFW
 	${OPENGL_LIBRARY}
 	${EXTRA_LIBS}
 )
+target_compile_options(ANTTWEAKBAR_116_OGLCORE_GLFW PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:windows-1252>")
 
 ### ASSIMP ###
 # AssImp already has a CMakeLists.txt so let's use these
@@ -162,7 +163,7 @@ set(ZLIB_LIBRARIES zlib)
 set(BUILD_STATIC_LIB ON)
 #set(ZLIB_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/zlib)
 add_subdirectory( assimp-3.0.1270/code )
-
+target_compile_options(assimp PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:windows-1252>")
 
 ### BULLET ###
 # Bullet already has a CMakeLists.txt so let's use these
@@ -176,4 +177,6 @@ add_subdirectory( bullet-2.81-rev2613/src/BulletCollision )
 add_subdirectory( bullet-2.81-rev2613/src/BulletDynamics )
 add_subdirectory( bullet-2.81-rev2613/src/LinearMath )
 
+target_compile_options(BulletSoftBody PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:windows-1252>")
+target_compile_options(BulletCollision PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:windows-1252>")
 
