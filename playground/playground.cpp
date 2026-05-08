@@ -285,7 +285,7 @@ void start()
     // 사실상 같은 물체를 구성하므로, 텍스쳐를 같이 쓴다.
     bucket.texture = bucketBackPlane.texture = scoopTexture;
 
-    glDeTexture(9999, 9999);
+    glBindTexture(9999, 9999);
 
     // ---------------렌더링 루프---------------//
     do
