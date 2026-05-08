@@ -3,9 +3,9 @@ link_libraries(glfw)
 
 if (BUILD_SHARED_LIBS)
     add_definitions(-DGLFW_DLL)
-    link_libraries("${OPENGL_gl_LIBRARY}" "${MATH_LIBRARY}")
+    link_libraries(OpenGL::GL "${MATH_LIBRARY}")
 else()
-    link_libraries(${glfw_LIBRARIES})
+    link_libraries(${glfw_LIBRARIES} OpenGL::GL "${MATH_LIBRARY}")
 endif()
 
 include_directories("${GLFW_SOURCE_DIR}/include"
