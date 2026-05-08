@@ -23,6 +23,12 @@ set(GDM_GLFW_VERSION "3.4.0" CACHE STRING "GLFW version")
 set(GDM_GLEW_VERSION "2.3.1" CACHE STRING "GLEW version")
 set(GDM_GLM_VERSION "1.0.3" CACHE STRING "GLM version")
 
+# Disable libdwarf in Windows MSVC(dbghelp will enough)
+if(MSVC)
+    set(CPPTRACE_GET_SYMBOLS_WITH_DBGHELP ON CACHE BOOL "" FORCE)
+    set(CPPTRACE_GET_SYMBOLS_WITH_LIBDWARF OFF CACHE BOOL "" FORCE)
+endif()
+
 # TODO : use file(DOWNLOAD)
 include(FetchContent)
 set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
